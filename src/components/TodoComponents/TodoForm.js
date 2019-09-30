@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function TodoForm(props) {
-  const { changeEventHandler, clickEventHandler, value } = props;
+  const { changeEventHandler, clickEventHandler, value, removeTodos } = props;
   return (
     <div>
       <input
@@ -12,7 +12,7 @@ export default function TodoForm(props) {
         onChange={changeEventHandler}
       />
       <button onClick={clickEventHandler}>Add Todo</button>
-      <button>Clear Completed</button>
+      <button onClick={removeTodos}>Clear Completed</button>
     </div>
   );
 }

@@ -48,6 +48,15 @@ class App extends React.Component {
     this.setState({ todoArray });
   };
 
+  removeTodos = () => {
+    const todosToBeRemoved = this.state.todos.filter( item => {
+      return (item.completed === false)
+    })
+    this.setState({
+      todos: todosToBeRemoved,
+    })
+  }
+
   render() {
     return (
       <div>
@@ -57,6 +66,7 @@ class App extends React.Component {
           changeEventHandler={this.changeEventHandler}
           clickEventHandler={this.clickEventHandler}
           value={this.state.formTodo}
+          removeTodos={this.removeTodos}
         />
       </div>
     );
