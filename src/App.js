@@ -2,6 +2,8 @@ import React from "react";
 
 import TodoForm from "./components/TodoComponents/TodoForm";
 import TodoList from "./components/TodoComponents/TodoList";
+import Search from "./components/TodoComponents/Search";
+
 
 class App extends React.Component {
   // you will need a place to store your state in this component.
@@ -11,7 +13,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       todos: [],
-      formTodo: ""
+      formTodo: "",
+      searchTerm: "",
     };
   }
 
@@ -33,6 +36,7 @@ class App extends React.Component {
         })
       };
     });
+    localStorage.setItem('todos', JSON.stringify(this.state.todos))
   };
 
   
@@ -58,25 +62,37 @@ class App extends React.Component {
 
 
   removeTodos = () => {
-    const todosToBeRemoved = this.state.todos.filter( item => {
+    const todosToBeKept = this.state.todos.filter( item => {
       return (item.completed === false)
     })
     this.setState({
-      todos: todosToBeRemoved,
+      todos: todosToBeKept,
     })
+  }
+
+  eventSearchHandler = event => {
+   this.setState({
+    searchTerm: event.target.value,
+   })
   }
 
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoList todos={this.state.todos} taskOnClick={this.taskOnClick} />
         <TodoForm
           changeEventHandler={this.changeEventHandler}
           clickEventHandler={this.clickEventHandler}
           value={this.state.formTodo}
           removeTodos={this.removeTodos}
           enterDownHandler={this.enterDownHandler}
+        />
+        <Search eventSearchHandler={this.eventSearchHandler} />
+        <TodoList 
+        todos={this.state.todos.filter( item => {
+          return item.task.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+        })} 
+        taskOnClick={this.taskOnClick} 
         />
       </div>
     );
