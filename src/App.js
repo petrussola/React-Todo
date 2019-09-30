@@ -11,33 +11,38 @@ constructor(props) {
   super(props);
   this.state = {
     todos: [],
-    formTodo: {},
+    formTodo: "",
   };
 }
 
 changeEventHandler = (event) => {
   this.setState({
-    formTodo: {
-      task: event.target.value,
-      id: Date.now(),
-      completed: false,
-    },
+    formTodo: event.target.value,
+    })
+}
+
+clickEventHandler = () => {
+  this.setState(currentState => {
+    return {
+      todos: currentState.todos.concat({
+        task: currentState.formTodo,
+        completed: false,
+        id: Date.now(),
+      })
+    }
   })
 }
 
-clickEventHandler = event => {
-  event.preventDefault();
-  this.setState(currentState => (
-    {todos: currentState.todos.concat(this.state.formTodo)}
-  ))
+taskOnClick = (event) => {
+  console.log('yay')
 }
 
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoList todos={this.state.todos} />
-        <TodoForm changeEventHandler={this.changeEventHandler} clickEventHandler={this.clickEventHandler} /> 
+        <TodoList todos={this.state.todos} taskOnClick={this.taskOnClick}/>
+        <TodoForm changeEventHandler={this.changeEventHandler} clickEventHandler={this.clickEventHandler}  /> 
       </div>
     );
   }

@@ -5,12 +5,12 @@ import React from 'react';
 import Todo from './Todo';
 
 export default function TodoList(props){ 
-    const { todos } = props;   
+    const { todos, taskOnClick } = props;   
     return (
         <div>
             {
                 todos.map( todo => {
-                    return (<Todo todo={todo} />)
+                    return (<Todo key={todo.id} todo={todo} taskOnClick={taskOnClick} />)
                 })
             }    
         </div>
