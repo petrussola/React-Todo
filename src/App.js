@@ -15,13 +15,19 @@ constructor(props) {
   };
 }
 
-changeEventHandler = event => {
+changeEventHandler = (event) => {
+  // debugger
+  // this.setState(currentState => ({
+  //   formTodo: event.target.value
+  // }))
+
   this.setState({
     formTodo: event.target.value,
   })
 }
 
 clickEventHandler = event => {
+  event.preventDefault();
   this.setState(currentState => (
     {todos: currentState.todos.concat(this.state.formTodo)}
   ))
@@ -31,7 +37,7 @@ clickEventHandler = event => {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoList />
+        <TodoList todos={this.state.todos} />
         <TodoForm changeEventHandler={this.changeEventHandler} clickEventHandler={this.clickEventHandler} /> 
       </div>
     );
