@@ -2,7 +2,9 @@ import React from 'react';
 
 export default function TodoForm({todo, taskOnClick}) {
     return (
-        <div onClick={event => taskOnClick()}>
+        <div 
+        style={todo.completed ? { textDecoration: 'line-through' } : null}
+        onClick={() => taskOnClick(todo.id)}>
             {todo.task}
         </div>
     )
