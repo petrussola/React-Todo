@@ -24,6 +24,7 @@ changeEventHandler = (event) => {
 clickEventHandler = () => {
   this.setState(currentState => {
     return {
+      formTodo: "",
       todos: currentState.todos.concat({
         task: currentState.formTodo,
         completed: false,
@@ -42,7 +43,7 @@ taskOnClick = (event) => {
       <div>
         <h2>Welcome to your Todo App!</h2>
         <TodoList todos={this.state.todos} taskOnClick={this.taskOnClick}/>
-        <TodoForm changeEventHandler={this.changeEventHandler} clickEventHandler={this.clickEventHandler}  /> 
+        <TodoForm changeEventHandler={this.changeEventHandler} clickEventHandler={this.clickEventHandler}  value={this.state.formTodo} /> 
       </div>
     );
   }
