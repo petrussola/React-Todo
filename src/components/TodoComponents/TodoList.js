@@ -8,7 +8,7 @@ export default function TodoList(props){
         <div>
             {
                 todos.map( todo => {
-                    return (<div>{todo}</div>)
+                    return (<div key={todo.id}>{todo.task}</div>)
                 })
             }    
         </div>

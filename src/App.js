@@ -11,18 +11,17 @@ constructor(props) {
   super(props);
   this.state = {
     todos: [],
-    formTodo: '',
+    formTodo: {},
   };
 }
 
 changeEventHandler = (event) => {
-  // debugger
-  // this.setState(currentState => ({
-  //   formTodo: event.target.value
-  // }))
-
   this.setState({
-    formTodo: event.target.value,
+    formTodo: {
+      task: event.target.value,
+      id: Date.now(),
+      completed: false,
+    },
   })
 }
 
