@@ -35,6 +35,14 @@ class App extends React.Component {
     });
   };
 
+  
+  enterDownHandler = event => {
+    if (event.keyCode === 13) {
+      this.clickEventHandler(event)
+    }
+  }
+
+
   taskOnClick = id => {
     const todoArray = this.state.todos.slice();
     const todoNewArray = todoArray.map(item => {
@@ -47,6 +55,7 @@ class App extends React.Component {
     });
     this.setState({ todoArray });
   };
+
 
   removeTodos = () => {
     const todosToBeRemoved = this.state.todos.filter( item => {
@@ -67,6 +76,7 @@ class App extends React.Component {
           clickEventHandler={this.clickEventHandler}
           value={this.state.formTodo}
           removeTodos={this.removeTodos}
+          enterDownHandler={this.enterDownHandler}
         />
       </div>
     );
